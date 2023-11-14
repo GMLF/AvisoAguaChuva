@@ -10,11 +10,11 @@ O chuvix é um projeto dedicado a alertar os moradores de regiões específicas 
   
 - **Doações Solidárias:** Permita que usuários generosos façam doações de alimentos e móveis para ajudar aqueles que foram afetados pelas fortes chuvas.
 
-## Doações
+## 🆘 Doações 
 
 Você também pode ajudar fazendo doações para fornecer suporte a quem precisa após eventos climáticos adversos. Todas as doações serão encaminhadas diretamente para as famílias afetadas.
 
 Sua contribuição faz a diferença!
 
-## Ferramentas utilizadas
+## 🔨 Ferramentas utilizadas
 
