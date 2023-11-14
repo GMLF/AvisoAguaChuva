@@ -1,7 +1,7 @@
-<h1>
-  <img src="https://i.imgur.com/L9di9Sw.jpg"/>
-  <p>Chuvix</p>
-</h1>
+<p align="center">
+  <img src="https://i.imgur.com/L9di9Sw.jpg" />
+  <h2 align="center">Alertas de chuva</h2>
+</p>
 
 ## 🚨 Sobre
 
