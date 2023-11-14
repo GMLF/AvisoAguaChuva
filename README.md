@@ -1,4 +1,7 @@
-# Projeto Chuvix
+<h1>
+  <img src="https://imgur.com/L9di9Sw">
+  <p>Chuvix</p>
+</h1>
 
 ## 🚨 Sobre
 
