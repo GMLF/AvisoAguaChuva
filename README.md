@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://i.imgur.com/L9di9Sw.jpg" />
-  <h2 align="center">Chuvix</h2>
+  <h2 align="center">Alerta de Chuva</h2>
 </p>
 
 ## 🚨 Sobre
