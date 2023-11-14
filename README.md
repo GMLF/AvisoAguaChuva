@@ -7,7 +7,7 @@
 
 O chuvix é um projeto dedicado a alertar os moradores de regiões específicas sobre a iminência de índices elevados de chuvas. O objetivo é fornecer informações precisas e em tempo real para que as pessoas possam se preparar adequadamente e tomar medidas preventivas.
 
-## Recursos Principais
+##📊 Recursos Principais
 
 - **Alertas de Chuva:** Receba notificações antecipadas sobre previsões de chuvas intensas em sua região.
   
