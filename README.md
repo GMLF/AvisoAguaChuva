@@ -18,3 +18,5 @@ Sua contribuição faz a diferença!
 
 ## 🔨 Ferramentas utilizadas
 
+**Front End:** React e Tailwind
+**Back End:**  Node
