@@ -1,13 +1,22 @@
-## Projeto Chuvix 🌧
+# Projeto ChuvaAlert
 
-## 🚨Sobre
+## Descrição
 
-O chuvix é um projeto de alerta de chuvas para comunidades. Receba notificações antecipadas e contribua com doações de alimentos e móveis para ajudar pessoas afetadas.
+O ChuvaAlert é um projeto dedicado a alertar os moradores de regiões específicas sobre a iminência de índices elevados de chuvas. O objetivo é fornecer informações precisas e em tempo real para que as pessoas possam se preparar adequadamente e tomar medidas preventivas.
+
+## Recursos Principais
+
+- **Alertas de Chuva:** Receba notificações antecipadas sobre previsões de chuvas intensas em sua região.
+  
+- **Doações Solidárias:** Permita que usuários generosos façam doações de alimentos e móveis para ajudar aqueles que foram afetados pelas fortes chuvas.
 
 ## Como Contribuir
 
-Contribua com desenvolvimento, design ou ideias. Faça a diferença nas comunidades atingidas por eventos climáticos adversos.
+Este projeto está aberto para contribuições da comunidade. Se você é um desenvolvedor, designer, ou tem ideias para melhorar a iniciativa, fique à vontade para contribuir para o repositório.
 
 ## Doações
 
-Ajude fazendo doações diretas para fornecer suporte imediato a famílias afetadas pelas chuvas intensas.
+Você também pode ajudar fazendo doações para fornecer suporte a quem precisa após eventos climáticos adversos. Todas as doações serão encaminhadas diretamente para as famílias afetadas.
+
+Sua contribuição faz a diferença!
+
