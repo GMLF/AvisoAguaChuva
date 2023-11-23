@@ -1,11 +1,35 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 export default function Index() {
+  const [dadosClima, setDadosClima] = useState(null);
+  const handleClick = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/clima', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+
+      const responseData = await response.data; 
+      if (responseData) {
+        const dadosClima = responseData.location.name; 
+      
+      
+        setDadosClima(dadosClima);
+      } else {
+        console.error('Dados climáticos não encontrados na resposta.');
+      }
+    } catch (error) {
+      console.error('Erro ao solicitar dados do clima:', error);
+    }
+  };
+
   return (
     <>
       <IndexNavbar fixed />
@@ -30,13 +54,16 @@ export default function Index() {
                 components for ReactJS, Vue and Angular.
               </p>
               <div className="mt-12">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/react/overview/notus?ref=nr-index"
-                  target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                >
-                  Get started
-                </a>
+              <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded" onClick={handleClick}>
+                testando
+              </button>
+              {dadosClima && (
+                <div className='bg-yellow-500'>
+                  <h3 className="mt-4 text-lg font-semibold">Dados do Clima:</h3>
+                  <pre className="text-blueGray-500">{JSON.stringify(dadosClima, null, 2)}</pre>
+                </div>
+              )}
+                
                 <a
                   href="https://github.com/creativetimofficial/notus-react?ref=nr-index"
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
