@@ -24,7 +24,7 @@ Sua contribuição faz a diferença!
 - **Front End:** React e Tailwind.
 - **Back End:** Node.
 
-## Como rodar o projeto?
+## ✔ Como rodar o projeto?
 
 1. **Passo:** Baixe o nvm-setup.exe do [link](https://github.com/coreybutler/nvm-windows/releases).
 
