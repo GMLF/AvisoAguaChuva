@@ -23,3 +23,17 @@ Sua contribuição faz a diferença!
 
 - **Front End:** React e Tailwind.
 - **Back End:**  Node.
+## Como rodar o projeto ?
+
+
+1 passo  - baixe o nvm-setup.exe do link https://github.com/coreybutler/nvm-windows/releases
+
+2 passo - abra o cmd e execute os comando  
+                nvm install 16
+                nvm use 16
+
+3 passo - baixe o projeto do GitHub - https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento
+
+4 passo - Dentro do cmd acesse a pasta frontend do projeto clonado
+
+5 passo - dentro do caminho frontend  digite npm install e depois npm start
