@@ -5,7 +5,7 @@
 
 ## 🚨 Sobre
 
-O chuvix é um projeto dedicado a alertar os moradores de regiões específicas sobre a iminência de índices elevados de chuvas. O objetivo é fornecer informações precisas e em tempo real para que as pessoas possam se preparar adequadamente e tomar medidas preventivas.
+O Chuvix é um projeto dedicado a alertar os moradores de regiões específicas sobre a iminência de índices elevados de chuvas. O objetivo é fornecer informações precisas e em tempo real para que as pessoas possam se preparar adequadamente e tomar medidas preventivas.
 
 ## 📊 Recursos Principais
 
@@ -22,18 +22,20 @@ Sua contribuição faz a diferença!
 ## 🔨 Ferramentas utilizadas
 
 - **Front End:** React e Tailwind.
-- **Back End:**  Node.
-## Como rodar o projeto ?
+- **Back End:** Node.
 
+## Como rodar o projeto?
 
-1 passo  - baixe o nvm-setup.exe do link https://github.com/coreybutler/nvm-windows/releases
+1. **Passo:** Baixe o nvm-setup.exe do link [https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases).
 
-2 passo - abra o cmd e execute os comando  
-                nvm install 16
-                nvm use 16
+2. **Passo:** Abra o cmd e execute os comandos:
+    ```bash
+    nvm install 16
+    nvm use 16
+    ```
 
-3 passo - baixe o projeto do GitHub - https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento
+3. **Passo:** Baixe o projeto do GitHub - [https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento](https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento).
 
-4 passo - Dentro do cmd acesse a pasta frontend do projeto clonado
+4. **Passo:** Dentro do cmd, acesse a pasta frontend do projeto clonado.
 
-5 passo - dentro do caminho frontend  digite npm install e depois npm start
+5. **Passo:** Dentro do caminho frontend, digite `npm install` e depois `npm start`.
