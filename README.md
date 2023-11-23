@@ -26,7 +26,7 @@ Sua contribuição faz a diferença!
 
 ## Como rodar o projeto?
 
-1. **Passo:** Baixe o nvm-setup.exe do link [https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases).
+1. **Passo:** Baixe o nvm-setup.exe do [link](https://github.com/coreybutler/nvm-windows/releases).
 
 2. **Passo:** Abra o cmd e execute os comandos:
     ```bash
@@ -34,7 +34,7 @@ Sua contribuição faz a diferença!
     nvm use 16
     ```
 
-3. **Passo:** Baixe o projeto do GitHub - [https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento](https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento).
+3. **Passo:** Baixe o projeto do GitHub - [AvisoAguaChuva](https://github.com/GMLF/AvisoAguaChuva/tree/desenvolvimento).
 
 4. **Passo:** Dentro do cmd, acesse a pasta frontend do projeto clonado.
 
