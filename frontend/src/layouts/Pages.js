@@ -9,6 +9,7 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 // views
 
 import Donation from "views/pages/donation.js";
+import Help from "views/pages/help.js";
 
 export default function Pages() {
   return (
@@ -21,6 +22,7 @@ export default function Pages() {
           ></div>
           <Switch>
             <Route path="/pages/donation" exact component={Donation} />
+            <Route path="/pages/help" exact component={Help} />
             <Redirect from="/pages" to="/pages/donation" />
           </Switch>
           <FooterSmall absolute />
