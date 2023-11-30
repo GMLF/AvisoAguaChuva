@@ -28,21 +28,12 @@ export default function FooterSmall(props) {
               <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
                   <a
-                    href=" "
+                    href="https://portal.utfpr.edu.br/institucional/sobre-a-utfpr-1"
                     className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
                   >
-                    Sobre nós
+                    Sobre a UTFPR
                   </a>
-                </li>
-                <li>
-                  <a
-                    href=" "
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    Contato
-                  </a>
-                </li>
-             
+                </li>         
               </ul>
             </div>
           </div>

@@ -35,7 +35,6 @@ export default function Navbar(props) {
                 <Link to="/pages/donation">
                   <a
                     className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  // add caminho para avisos
                   >
                     <i className="text-blueGray-400 far fa-bell text-lg leading-lg mr-2 ml-3" />{" "}
                     Avisos
@@ -52,7 +51,6 @@ export default function Navbar(props) {
                 <Link to="/pages/help">
                   <a
                     className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  // add caminho para ajudas
                   >
                     <i className="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2 ml-3" />{" "}
                     PEDIR AJUDA
