@@ -47,18 +47,7 @@ export default function Login() {
                       placeholder="Senha"
                     />
                   </div>
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        Lembrar-me
-                      </span>
-                    </label>
-                  </div>
+              
 
                   <div className="text-center mt-6">
                     <button
@@ -81,6 +70,8 @@ export default function Login() {
                   <small>Esqueceu sua senha?</small>
                 </a>
               </div>
+              <br></br>
+
               { // Botao para criar nova conta
             /* <div className="w-1/2 text-right">
                 <Link to="/auth/register" className="text-blueGray-200">
@@ -89,8 +80,13 @@ export default function Login() {
               </div>
              */}
             </div>
+            <br></br>
+
           </div>
+          <br></br>
+
         </div>
+        <br></br>
       </div>
 
     </>
