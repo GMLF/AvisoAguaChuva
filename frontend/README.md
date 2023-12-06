@@ -122,7 +122,7 @@ notus-react
 ├── jsconfig.json
 ├── package.json
 ├── public
-│   ├── favicon.ico
+│   ├── favicon.png
 │   ├── index.html
 │   ├── manifest.json
 │   └── robots.txt
