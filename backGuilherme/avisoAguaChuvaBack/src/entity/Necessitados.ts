@@ -1,7 +1,7 @@
 import { text } from "stream/consumers"
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
-@Entity("necessitados")
+@Entity({name:"necessitados"})
 export class Necessitados {
 
     @PrimaryGeneratedColumn()
