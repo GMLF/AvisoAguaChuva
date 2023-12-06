@@ -10,6 +10,7 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 
 import Login from "views/auth/Login.js";
 import Register from "views/auth/Register.js";
+import notFound from "views/notFound.js";
 
 export default function Auth() {
   return (
@@ -23,7 +24,10 @@ export default function Auth() {
           <Switch>
             <Route path="/auth/login" exact component={Login} />
             <Route path="/auth/register" exact component={Register} />
-            <Redirect from="/auth" to="/auth/login" />
+            <Route path="/notFound" exact component={notFound} />
+
+            <Redirect from="/auth" to="/notFound" />
+
           </Switch>
           <FooterSmall absolute />
         </section>

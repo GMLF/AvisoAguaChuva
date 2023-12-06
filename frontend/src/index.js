@@ -16,6 +16,7 @@ import Pages from "layouts/Pages.js";
 import Landing from "views/Landing.js";
 import Profile from "views/Profile.js";
 import Index from "views/Index.js";
+import notFound from "views/notFound.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -27,9 +28,11 @@ ReactDOM.render(
       {/* add routes without layouts */}
       <Route path="/landing" exact component={Landing} />
       <Route path="/profile" exact component={Profile} />
+      <Route path="/notFound" exact component={notFound} />
       <Route path="/" exact component={Index} />
       {/* add redirect for first page */}
-      <Redirect from="*" to="/" />
+      <Redirect from="*" to="/notFound" />
+
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
