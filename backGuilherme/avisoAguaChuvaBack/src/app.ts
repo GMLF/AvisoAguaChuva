@@ -11,6 +11,8 @@ const app = express();
 //npm run typeorm migration:run -- -d src/data-source
 app.use(express.json());
 app.use(cors());
+
+//passando as rotas pras ações
 app.post('/doacao',criaDoacaoControlador)
 app.get('/doacao',lerdoacaoControler)
 app.post('/necessitados',criarNecessitadosControlador)

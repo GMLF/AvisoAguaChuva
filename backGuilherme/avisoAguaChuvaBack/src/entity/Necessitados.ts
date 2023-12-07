@@ -30,4 +30,7 @@ export class Necessitados {
 
     @Column({type:"text"})
     listaNecessidade:string
+
+    @Column({default:true,nullable:true})
+    status:boolean
 }

@@ -30,4 +30,7 @@ export class Doacao {
 
     @Column({type:"text"})
     listaDoacao:string
+
+    @Column({default:true,nullable:true})
+    status:boolean
 }
