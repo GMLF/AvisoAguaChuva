@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { criaDoacaoControlador, lerdoacaoControler } from './controlador/doacao.controlador';
 import { criarNecessitadosControlador, lerNecessitadosControler } from './controlador/necessitados.controlador';
+import { criaCadastroControlador, lerdCadastroControler } from './controlador/cadastro.controlador';
 
 const app = express();
 
@@ -15,6 +16,10 @@ app.use(cors());
 //passando as rotas pras ações
 app.post('/doacao',criaDoacaoControlador)
 app.get('/doacao',lerdoacaoControler)
+
+app.post('/cadastro',criaCadastroControlador)
+app.get('/cadastro',lerdCadastroControler)
+
 app.post('/necessitados',criarNecessitadosControlador)
 app.get('/necessitados',lerNecessitadosControler)
 export {app}

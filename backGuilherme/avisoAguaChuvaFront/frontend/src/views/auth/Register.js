@@ -1,6 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Register() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [registroSucesso, setRegistroSucesso] = useState(false);
+  const [erroCamposVazios, setErroCamposVazios] = useState(false);
+
+  const resetForm = () => {
+    setNome("");
+    setEmail("");
+    setSenha("");
+    setRegistroSucesso(false);
+    setErroCamposVazios(false);
+  };
+
+  const enviarForm = async (e) => {
+    e.preventDefault();
+
+    // Verificar se todos os campos estão preenchidos
+    if (!nome || !email || !senha) {
+      setErroCamposVazios(true);
+      return;
+    }
+
+    const data = {
+      nome,
+      email,
+      senha,
+    };
+
+    try {
+      await axios.post("http://localhost:3000/cadastro", data, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      resetForm();
+      setRegistroSucesso(true);
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -10,51 +52,25 @@ export default function Register() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-500 text-sm font-bold">
-                    Sign up with
+                    Cadastre-se com
                   </h6>
                 </div>
-                <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img
-                      alt="..."
-                      className="w-5 mr-1"
-                      src={require("assets/img/github.svg").default}
-                    />
-                    Github
-                  </button>
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img
-                      alt="..."
-                      className="w-5 mr-1"
-                      src={require("assets/img/google.svg").default}
-                    />
-                    Google
-                  </button>
-                </div>
-                <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <div className="text-blueGray-400 text-center mb-3 font-bold">
-                  <small>Or sign up with credentials</small>
-                </div>
-                <form>
+                <form onSubmit={enviarForm}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Name
+                      Nome
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Name"
+                      placeholder="Nome"
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
                     />
                   </div>
 
@@ -69,6 +85,8 @@ export default function Register() {
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -77,44 +95,37 @@ export default function Register() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Password
+                      Senha
                     </label>
                     <input
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Password"
+                      placeholder="Senha"
+                      value={senha}
+                      onChange={(e) => setSenha(e.target.value)}
                     />
                   </div>
 
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
-                        <a
-                          href="#pablo"
-                          className="text-lightBlue-500"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Privacy Policy
-                        </a>
-                      </span>
-                    </label>
-                  </div>
+                  {erroCamposVazios && (
+                    <div className="text-red-500 text-xs mt-1">
+                      Todos os campos são obrigatórios.
+                    </div>
+                  )}
 
                   <div className="text-center mt-6">
                     <button
-                      className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                     className="bg-lightBlue-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      type="submit"
                     >
-                      Create Account
+                      Criar Conta
                     </button>
                   </div>
                 </form>
+                {registroSucesso && (
+                  <div className="text-green-500 mt-3 text-center">
+                    Registro realizado com sucesso!
+                  </div>
+                )}
               </div>
             </div>
           </div>

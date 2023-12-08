@@ -15,6 +15,7 @@ import Maps from "views/admin/Maps.js";
 import Settings from "views/admin/Settings.js";
 import TablesHelp from "views/admin/TablesHelp";
 import TablesDonation from "views/admin/TablesDonation";
+import notFound from "views/notFound.js";
 
 export default function Admin() {
   return (
@@ -31,8 +32,8 @@ export default function Admin() {
             <Route path="/admin/settings" exact component={Settings} />
             <Route path="/admin/TablesDonation" exact component={TablesDonation} />
             <Route path="/admin/TablesHelp" exact component={TablesHelp} />
-            
-            <Redirect from="/admin" to="/admin/dashboard" />
+            <Route path="/notFound" exact component={notFound} />
+            <Redirect from="/admin" to="/notFound" />
           </Switch>
           <FooterAdmin />
         </div>

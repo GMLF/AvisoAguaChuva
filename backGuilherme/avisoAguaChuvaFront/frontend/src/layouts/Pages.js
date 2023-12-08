@@ -10,7 +10,8 @@ import FooterSmall from "components/Footers/FooterSmall.js";
 
 import Donation from "views/pages/donation.js";
 import Help from "views/pages/help.js";
-import Notification from "views/pages/notification.js";
+import notFound from "views/notFound.js";
+import Notification from "views/pages/notification";
 
 export default function Pages() {
   return (
@@ -25,7 +26,9 @@ export default function Pages() {
             <Route path="/pages/donation" exact component={Donation} />
             <Route path="/pages/help" exact component={Help} />
             <Route path="/pages/notification" exact component={Notification} />
-            <Redirect from="/pages" to="/pages/donation" />
+            <Route path="/notFound" exact component={notFound} />
+            <Redirect from="/pages" to="/notFound" />
+            
           </Switch>
           <FooterSmall absolute />
         </section>

@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [erroLogin, setErroLogin] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      // Salvar temporariamente os dados de login fornecidos pelo usuário
+      const dadosTemporarios = { email, senha };
+
+      // Consultar a tabela do banco de dados para verificar se os dados existem
+      const response = await axios.post("http://localhost:3000/login", {
+        email: email,
+        senha: senha,
+      });
+
+      if (response.data.success) {
+        console.log("Login bem-sucedido!");
+        // Realizar ações após o login bem-sucedido, se necessário
+      } else {
+        setErroLogin("Credenciais inválidas. Verifique seu email e senha.");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      setErroLogin("Erro ao realizar o login. Tente novamente mais tarde.");
+    }
+  };
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -14,11 +42,9 @@ export default function Login() {
                     Entre com a sua conta para acessar a plataforma
                   </h6>
                 </div>
-
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-
                 <form>
                   <div className="relative w-full mb-3">
                     <label
@@ -29,11 +55,12 @@ export default function Login() {
                     </label>
                     <input
                       type="email"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${erroLogin ? 'border-red-500' : ''}`}
                       placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -43,16 +70,18 @@ export default function Login() {
                     </label>
                     <input
                       type="password"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${erroLogin ? 'border-red-500' : ''}`}
                       placeholder="Senha"
+                      value={senha}
+                      onChange={(e) => setSenha(e.target.value)}
                     />
                   </div>
-              
-
+                  {erroLogin && <p className="text-red-500 text-xs mt-1">{erroLogin}</p>}
                   <div className="text-center mt-6">
                     <button
                       className="bg-lightBlue-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
+                      onClick={handleLogin}
                     >
                       Entrar
                     </button>
@@ -62,33 +91,19 @@ export default function Login() {
             </div>
             <div className="flex flex-wrap mt-6 relative">
               <div className="w-1/2">
-                <a
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  className="text-blueGray-200"
-                >
+                <Link to="#" className="text-black">
                   <small>Esqueceu sua senha?</small>
-                </a>
+                </Link>
               </div>
-              <br></br>
-
-              { // Botao para criar nova conta
-            /* <div className="w-1/2 text-right">
-                <Link to="/auth/register" className="text-blueGray-200">
-                  <small>Create new account</small>
-                </Link> 
+              <div className="w-1/2 text-right">
+                <Link to="/auth/register" className="text-blueGray-800">
+                  <small>Registrar-se</small>
+                </Link>
               </div>
-             */}
             </div>
-            <br></br>
-
           </div>
-          <br></br>
-
         </div>
-        <br></br>
       </div>
-
     </>
   );
 }
