@@ -1,18 +1,16 @@
 import { text } from "stream/consumers"
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn} from "typeorm"
 
 @Entity({name:"cadastro"})
+
 export class Cadastro {
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryColumn()
+    email:string
 
     @Column()
     nome: string
-
-    @Column()
-    email:string
-    
+        
     @Column()
     senha:string
 }

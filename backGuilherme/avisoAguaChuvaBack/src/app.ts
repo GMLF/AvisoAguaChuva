@@ -7,7 +7,7 @@ import { criaCadastroControlador, lerdCadastroControler } from './controlador/ca
 const app = express();
 
 //comando para criar migrations
-// npm run typeorm migration:generate src/migration/CriaçãodaTabelaAjuda -- -d src/data-source
+// npm run typeorm migration:generate src/migration/CriaçãodaTabelaDoação_E_NecessitadosCriaçãoTabelaRegistro -- -d src/data-source
 //comando para executar a migration
 //npm run typeorm migration:run -- -d src/data-source
 app.use(express.json());

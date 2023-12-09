@@ -5,15 +5,33 @@ export default function Register() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [registroSucesso, setRegistroSucesso] = useState(false);
+  const [registroSucesso, setRegistroSucesso] = useState(0);
   const [erroCamposVazios, setErroCamposVazios] = useState(false);
+  const [emailCadastrado, setEmailCadastrado] = useState(0);
 
   const resetForm = () => {
     setNome("");
     setEmail("");
     setSenha("");
-    setRegistroSucesso(false);
+    setRegistroSucesso(0);
     setErroCamposVazios(false);
+    setEmailCadastrado(0);
+  };
+
+  const verificarEmailExistente = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/cadastro?email=${email}`);
+
+      if (response.data.length > 0) {
+        // E-mail já existe
+        setEmailCadastrado(1);
+      } else {
+        // E-mail não existe
+        setEmailCadastrado(2);
+      }
+    } catch (error) {
+      console.error("Erro ao verificar e-mail:", error);
+    }
   };
 
   const enviarForm = async (e) => {
@@ -25,21 +43,27 @@ export default function Register() {
       return;
     }
 
-    const data = {
-      nome,
-      email,
-      senha,
-    };
+    // Verificar se o e-mail já existe
+    await verificarEmailExistente();
 
-    try {
-      await axios.post("http://localhost:3000/cadastro", data, {
-        headers: { "Content-Type": "application/json" },
-      });
+    if (emailCadastrado === 1) {
+      // E-mail não existe, realizar o cadastro
+      try {
+        await axios.post("http://localhost:3000/cadastro", {
+          nome,
+          email,
+          senha,
+        });
 
-      resetForm();
-      setRegistroSucesso(true);
-    } catch (error) {
-      console.error("Erro na requisição:", error);
+        resetForm();
+        setRegistroSucesso(1);
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+        setRegistroSucesso(6);
+      }
+    } else if (emailCadastrado === 2) {
+      // E-mail já cadastrado
+      setRegistroSucesso(0);
     }
   };
 
@@ -83,10 +107,11 @@ export default function Register() {
                     </label>
                     <input
                       type="email"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${emailCadastrado === 2 ? 'border-red-500' : ''}`}
                       placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      onBlur={verificarEmailExistente}
                     />
                   </div>
 
@@ -114,16 +139,21 @@ export default function Register() {
 
                   <div className="text-center mt-6">
                     <button
-                     className="bg-lightBlue-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      className="bg-lightBlue-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                     >
                       Criar Conta
                     </button>
                   </div>
                 </form>
-                {registroSucesso && (
+                {registroSucesso === 1 && (
                   <div className="text-green-500 mt-3 text-center">
                     Registro realizado com sucesso!
+                  </div>
+                )}
+                {registroSucesso === 6 && (
+                  <div className="text-red-500 mt-3 text-center">
+                    Erro na requisição ao cadastrar.
                   </div>
                 )}
               </div>

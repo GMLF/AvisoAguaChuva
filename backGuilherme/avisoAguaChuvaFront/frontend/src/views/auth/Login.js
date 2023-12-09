@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erroLogin, setErroLogin] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleLogin = async () => {
     try {
-      // Salvar temporariamente os dados de login fornecidos pelo usuário
       const dadosTemporarios = { email, senha };
 
-      // Consultar a tabela do banco de dados para verificar se os dados existem
-      const response = await axios.post("http://localhost:3000/login", {
-        email: email,
-        senha: senha,
-      });
+      const response = await axios.get("http://localhost:3000/cadastro");
 
-      if (response.data.success) {
+      const usuarioExistente = response.data.find(
+        (usuario) => usuario.email === email && usuario.senha === senha
+      );
+
+      if (usuarioExistente) {
         console.log("Login bem-sucedido!");
-        // Realizar ações após o login bem-sucedido, se necessário
+        setRedirect(true);
       } else {
         setErroLogin("Credenciais inválidas. Verifique seu email e senha.");
       }
@@ -32,6 +32,8 @@ export default function Login() {
 
   return (
     <>
+      {redirect && <Redirect to="/admin/dashboard" />}
+
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
