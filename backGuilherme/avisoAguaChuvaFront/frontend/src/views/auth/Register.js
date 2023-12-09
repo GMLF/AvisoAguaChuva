@@ -18,6 +18,14 @@ export default function Register() {
     setEmailCadastrado(0);
   };
 
+  const clearSuccessMessage = () => {
+    setRegistroSucesso(0);
+  };
+
+  const clearErrorMessage = () => {
+    setRegistroSucesso(0);
+  };
+
   const verificarEmailExistente = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/cadastro?email=${email}`);
@@ -25,6 +33,10 @@ export default function Register() {
       if (response.data.length > 0) {
         // E-mail já existe
         setEmailCadastrado(1);
+        setRegistroSucesso(6);
+
+        // Limpar a mensagem de erro após 3 segundos
+        setTimeout(clearErrorMessage, 3000);
       } else {
         // E-mail não existe
         setEmailCadastrado(2);
@@ -57,6 +69,9 @@ export default function Register() {
 
         resetForm();
         setRegistroSucesso(1);
+
+        // Limpar a mensagem de sucesso após 5 segundos
+        setTimeout(clearSuccessMessage, 4000);
       } catch (error) {
         console.error("Erro na requisição:", error);
         setRegistroSucesso(6);
@@ -64,6 +79,9 @@ export default function Register() {
     } else if (emailCadastrado === 2) {
       // E-mail já cadastrado
       setRegistroSucesso(0);
+
+      // Limpar a mensagem de erro após 3 segundos
+      setTimeout(clearErrorMessage, 3000);
     }
   };
 
@@ -153,7 +171,7 @@ export default function Register() {
                 )}
                 {registroSucesso === 6 && (
                   <div className="text-red-500 mt-3 text-center">
-                    Erro na requisição ao cadastrar.
+                    E-mail já cadastrado!
                   </div>
                 )}
               </div>
