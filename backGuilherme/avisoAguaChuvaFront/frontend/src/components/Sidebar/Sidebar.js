@@ -190,7 +190,7 @@ export default function Sidebar() {
                   to="/"
                 >
                   <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Landing Page
+                  Home Page
                 </Link>
               </li>
 
