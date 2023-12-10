@@ -18,14 +18,6 @@ export default function Register() {
     setEmailCadastrado(0);
   };
 
-  const clearSuccessMessage = () => {
-    setRegistroSucesso(0);
-  };
-
-  const clearErrorMessage = () => {
-    setRegistroSucesso(0);
-  };
-
   const verificarEmailExistente = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/cadastro?email=${email}`);
@@ -33,10 +25,6 @@ export default function Register() {
       if (response.data.length > 0) {
         // E-mail já existe
         setEmailCadastrado(1);
-        setRegistroSucesso(6);
-
-        // Limpar a mensagem de erro após 3 segundos
-        setTimeout(clearErrorMessage, 3000);
       } else {
         // E-mail não existe
         setEmailCadastrado(2);
@@ -58,33 +46,33 @@ export default function Register() {
     // Verificar se o e-mail já existe
     await verificarEmailExistente();
 
-    if (emailCadastrado === 1) {
-      // E-mail não existe, realizar o cadastro
-      try {
-        await axios.post("http://localhost:3000/cadastro", {
-          nome,
-          email,
-          senha,
-        });
-
-        resetForm();
-        setRegistroSucesso(1);
-
-        // Limpar a mensagem de sucesso após 5 segundos
-        setTimeout(clearSuccessMessage, 4000);
-      } catch (error) {
-        console.error("Erro na requisição:", error);
-        setRegistroSucesso(6);
-      }
-    } else if (emailCadastrado === 2) {
+    if (emailCadastrado) {
       // E-mail já cadastrado
-      setRegistroSucesso(0);
+      setRegistroSucesso(2);
+      resetForm()
+    }
 
-      // Limpar a mensagem de erro após 3 segundos
-      setTimeout(clearErrorMessage, 3000);
+    const data = {
+      nome,
+      email,
+      senha,
+    };
+
+    if(emailCadastrado == true){
+    try {
+      // Cadastro se o e-mail não existir
+      await axios.post("http://localhost:3000/cadastro", data, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      resetForm();
+      setRegistroSucesso(1);
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      setRegistroSucesso(6);
     }
   };
-
+}
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -125,7 +113,7 @@ export default function Register() {
                     </label>
                     <input
                       type="email"
-                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${emailCadastrado === 2 ? 'border-red-500' : ''}`}
+                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${emailCadastrado ? 'border-red-500' : ''}`}
                       placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -164,16 +152,6 @@ export default function Register() {
                     </button>
                   </div>
                 </form>
-                {registroSucesso === 1 && (
-                  <div className="text-green-500 mt-3 text-center">
-                    Registro realizado com sucesso!
-                  </div>
-                )}
-                {registroSucesso === 6 && (
-                  <div className="text-red-500 mt-3 text-center">
-                    E-mail já cadastrado!
-                  </div>
-                )}
               </div>
             </div>
           </div>

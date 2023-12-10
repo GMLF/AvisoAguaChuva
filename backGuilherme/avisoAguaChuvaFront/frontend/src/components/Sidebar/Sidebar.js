@@ -169,7 +169,7 @@ export default function Sidebar() {
                   to="/auth/login"
                 >
                   <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Login
+                  Loggout
                 </Link>
               </li>
 
@@ -217,7 +217,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/pages/chuva"
+                  to="/pages/notification"
                 >
                   <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
                   Aviso de Chuva
