@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from "react";
 
 // components
@@ -5,6 +6,47 @@ import React from "react";
 import CardStats from "components/Cards/CardStats.js";
 
 export default function HeaderStats() {
+=======
+import React, { useState, useEffect } from "react";
+import CardStats from "components/Cards/CardStats.js";
+import axios from "axios";
+
+export default function HeaderStats() {
+
+  const [quantidadeNomes_doacao, setQuantidadeNomes_doacao] = useState(0); 
+  const [quantidadeNomes_help, setQuantidadeNomes_help] = useState(0); 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/doacao");
+
+        // Contar a quantidade de nomes
+        setQuantidadeNomes_doacao(response.data.length);
+      } catch (error) {
+        console.error("Erro ao buscar dados da API:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/necessitados");
+
+        // Contar a quantidade de nomes
+        setQuantidadeNomes_help(response.data.length);
+      } catch (error) {
+        console.error("Erro ao buscar dados da API:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+>>>>>>> Stashed changes
   return (
     <>
       {/* Header */}
@@ -16,7 +58,11 @@ export default function HeaderStats() {
               <div className="w-full lg:w-4/12 xl:w-4/12 px-4">
                 <CardStats
                   statSubtitle="NOVAS AJUDAS"
+<<<<<<< Updated upstream
                   statTitle="350,897"
+=======
+                  statTitle={quantidadeNomes_help.toString()}
+>>>>>>> Stashed changes
                   statArrow=""
                   statPercent="100"
                   statPercentColor=""
@@ -28,7 +74,11 @@ export default function HeaderStats() {
               <div className="w-full lg:w-4/12 xl:w-4/12 px-4">
                 <CardStats
                   statSubtitle="NOVAS DOAÇOES"
+<<<<<<< Updated upstream
                   statTitle="924"
+=======
+                  statTitle={quantidadeNomes_doacao.toString()}
+>>>>>>> Stashed changes
                   statArrow=""
                   statPercent="100"
                   statPercentColor=""
@@ -41,7 +91,11 @@ export default function HeaderStats() {
               <div className="w-full lg:w-4/12 xl:w-4/12 px-4">
                 <CardStats
                   statSubtitle="PORCENTAGEM AJUDAS"
+<<<<<<< Updated upstream
                   statTitle="924"
+=======
+                  statTitle="0"
+>>>>>>> Stashed changes
                   statArrow=""
                   statPercent="100"
                   statPercentColor=""
