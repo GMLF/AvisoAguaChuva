@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function Notification() {
   const cidadesParana = [
@@ -12,8 +13,69 @@ export default function Notification() {
     "Colombo",
     "Guarapuava",
     "Paranaguá",
+    "Campo Grande",
   ];
 
+  const [cidadeSelecionada, setCidadeSelecionada] = useState("");
+  const [horario, setHorario] = useState("");
+  const [precipitacao, setPrecipitacao] = useState("");
+  const [alertaEnchente, setAlertaEnchente] = useState("");
+  const [alertaChuva, setAlertaChuva] = useState(false);
+
+
+  const removerAcentos = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + '-parana';
+  };
+
+  const handleCidadeChange = (event) => {
+    // Atualiza a cidade selecionada quando o usuário escolhe uma opção
+    setCidadeSelecionada(event.target.value);
+  };
+
+  const handleVerificarClick = () => {
+    const cidadeSemAcento = removerAcentos(cidadeSelecionada.toLowerCase());
+    // Construa a URL da API com a cidade selecionada
+    const apiUrl = `http://api.weatherstack.com/current`;
+
+    const params = {
+      access_key: '29973e7a919cb0510e7768baf62a38c0',
+      query: cidadeSemAcento
+
+    }
+    // Construa a URL da API com base nos parâmetros
+    const url = new URL(apiUrl);
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+    // Faça a requisição à API usando Fetch
+    fetch(url)
+      .then(response => {
+        // Verifique se a resposta da API foi bem-sucedida (status 200-299)
+        if (!response.ok) {
+          throw new Error(`Erro na requisição à API: ${response.status}`);
+        }
+        // Parse da resposta JSON
+        return response.json();
+      })
+      .then(data => {
+        // Extraia os dados relevantes da resposta da API
+        const currentData = data.current;
+
+        // Atualize os estados com os dados obtidos
+        setHorario(currentData.observation_time || "");
+        setPrecipitacao(`${currentData.precip}mm` || "");
+
+        // Verificação para o alerta de chuva
+        const novoAlertaChuva = parseFloat(currentData.precip) > 55;
+        setAlertaChuva(novoAlertaChuva);
+
+        // Atualização da string do alertaEnchente com base no valor de alertaChuva
+        setAlertaEnchente(novoAlertaChuva ? "Alerta de Chuva" : "Sem alerta");
+      })
+      .catch(error => {
+        // Em caso de erro, manipule conforme necessário
+        console.error("Erro na requisição à API:", error);
+      });
+  }
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -26,7 +88,7 @@ export default function Notification() {
             </div>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-4">
-            <form>
+            <form action="" method="POST">
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-3/12 px-4">
                   <div className="relative w-full mb-3">
@@ -40,6 +102,8 @@ export default function Notification() {
                     <select
                       id="cidade"
                       name="cidade"
+                      value={cidadeSelecionada}  // Valor da cidade selecionada
+                      onChange={handleCidadeChange} // Adiciona o manipulador de eventos onChange
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2"
                     >
                       {cidadesParana.map((cidade, index) => (
@@ -57,11 +121,11 @@ export default function Notification() {
                       htmlFor="horario"
                     >
                       <i class="far fa-clock mr-2"></i>
-                      Horário
+                      Horário de Observação
                     </label>
                     <div className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2">
-                      {/* Coloque aqui a informação a ser exibida */}
-                      12:00 PM
+
+                      {horario}
                     </div>
                   </div>
                 </div>
@@ -72,11 +136,11 @@ export default function Notification() {
                       htmlFor="precipitacao"
                     >
                       <i class="fas fa-tint mr-2"></i>
-                      Precipitação
+                      Precipitação Aproximada
                     </label>
                     <div className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2">
                       {/* Coloque aqui a informação a ser exibida */}
-                      10mm
+                      {precipitacao}
                     </div>
                   </div>
                 </div>
@@ -91,16 +155,17 @@ export default function Notification() {
                     </label>
                     <div className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2">
                       {/* Coloque aqui a informação a ser exibida */}
-                      Sem alertas
+                      {alertaEnchente}
                     </div>
                   </div>
                 </div>
 
-                
+
                 <div className="text-center mt-6">
                   <button
                     className="bg-lightBlue-500 text-white active:bg-lightBlue-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="button"
+                    onClick={handleVerificarClick}
                   >
                     <i class="far fa-check-circle mr-2"></i>
                     {/* Botão de verificar aqui */}
