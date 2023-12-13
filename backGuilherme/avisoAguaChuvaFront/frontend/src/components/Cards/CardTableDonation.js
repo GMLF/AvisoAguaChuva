@@ -146,9 +146,9 @@ export default function CardTableDonation({ color }) {
             <tbody>
               {info.map((row, index) => (
                 <tr key={index}>
-                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                    {row.nome}
-                  </th>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    <span style={{ fontWeight: "normal" }}>{row.nome}</span>
+                  </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                     {row.telefone}
                   </td>

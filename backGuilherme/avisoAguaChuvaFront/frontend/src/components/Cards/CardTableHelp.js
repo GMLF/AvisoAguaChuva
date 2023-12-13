@@ -146,31 +146,33 @@ export default function CardTableNecessitados({ color }) {
             <tbody>
               {info.map((row, index) => (
                 <tr key={index}>
-                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                    {row.nome}
-                  </th>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
+                    <div className="flex items-center">
+                      <span className="ml-3">{row.nome}</span>
+                    </div>
+                  </td>
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.telefone}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.email}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.cidade}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.endereco}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.estado}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.cep}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     {row.listaNecessidade}
                   </td>
-                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs p-4">
                     <select
                       value={row.status}
                       onChange={(e) => handleStatusChange(index, e.target.value)}

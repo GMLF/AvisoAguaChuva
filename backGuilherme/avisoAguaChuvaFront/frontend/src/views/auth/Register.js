@@ -1,55 +1,41 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export default function Register() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [registroSucesso, setRegistroSucesso] = useState(0);
   const [erroCamposVazios, setErroCamposVazios] = useState(false);
-  const [emailCadastrado, setEmailCadastrado] = useState(0);
+  const [verRender, setVerRender] = useState(false);
+  const [emailCriado, setEmailCriado] = useState(false);
+
+  let verifica = [];
+
+  const consultaBanco = async () => {
+    await axios
+      .get("http://localhost:3000/cadastro")
+      .then((res) => {
+        console.log(res);
+        verifica = res.data.map((user) => {
+          return user.email === email;
+        });
+      });
+  };
 
   const resetForm = () => {
     setNome("");
     setEmail("");
     setSenha("");
-    setRegistroSucesso(0);
     setErroCamposVazios(false);
-    setEmailCadastrado(0);
-  };
-
-  const verificarEmailExistente = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/cadastro?email=${email}`);
-
-      if (response.data.length > 0) {
-        // E-mail já existe
-        setEmailCadastrado(1);
-      } else {
-        // E-mail não existe
-        setEmailCadastrado(2);
-      }
-    } catch (error) {
-      console.error("Erro ao verificar e-mail:", error);
-    }
   };
 
   const enviarForm = async (e) => {
     e.preventDefault();
 
-    // Verificar se todos os campos estão preenchidos
     if (!nome || !email || !senha) {
       setErroCamposVazios(true);
       return;
-    }
-
-    // Verificar se o e-mail já existe
-    await verificarEmailExistente();
-
-    if (emailCadastrado) {
-      // E-mail já cadastrado
-      setRegistroSucesso(2);
-      resetForm()
     }
 
     const data = {
@@ -58,21 +44,32 @@ export default function Register() {
       senha,
     };
 
-    if(emailCadastrado == true){
-    try {
-      // Cadastro se o e-mail não existir
-      await axios.post("http://localhost:3000/cadastro", data, {
-        headers: { "Content-Type": "application/json" },
-      });
+    await consultaBanco();
 
-      resetForm();
-      setRegistroSucesso(1);
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-      setRegistroSucesso(6);
+    if (verifica.includes(true)) {
+      setVerRender(true);
+
+      setTimeout(() => {
+        setVerRender(false);
+      }, 2000);
+    } else {
+      await axios.post("http://localhost:3000/cadastro", data);
+
+      // Atualize o estado para indicar que o registro foi realizado com sucesso
+      setEmailCriado(true);
+
+      // Agora, após 5 segundos, redirecione para a página de login
+      setTimeout(() => {
+        setEmailCriado(false); // Limpa a mensagem após o redirecionamento
+        setVerRender(false); // Limpa a mensagem de erro, se houver
+        // Redireciona para a página de login
+        window.location.href = "/auth/login";
+      }, 2000);
     }
+
+    resetForm();
   };
-}
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -113,11 +110,10 @@ export default function Register() {
                     </label>
                     <input
                       type="email"
-                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 ${emailCadastrado ? 'border-red-500' : ''}`}
+                      className={`border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 `}
                       placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      onBlur={verificarEmailExistente}
                     />
                   </div>
 
@@ -136,7 +132,14 @@ export default function Register() {
                       onChange={(e) => setSenha(e.target.value)}
                     />
                   </div>
-
+                  {emailCriado && (
+                    <div style={{ color: '#00C853' }} className="text-xs mt-1">
+                    Registro Realizado com Sucesso
+                  </div>
+                  )}
+                  {verRender && (
+                    <div className="text-red-500 text-xs mt-1">E-mail já existe</div>
+                  )}
                   {erroCamposVazios && (
                     <div className="text-red-500 text-xs mt-1">
                       Todos os campos são obrigatórios.

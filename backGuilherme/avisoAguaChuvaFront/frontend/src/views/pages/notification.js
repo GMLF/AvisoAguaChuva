@@ -14,6 +14,8 @@ export default function Notification() {
     "Guarapuava",
     "Paranaguá",
     "Campo Grande",
+    "Dois Vizinhos",
+    "Rio Branco"
   ];
 
   const [cidadeSelecionada, setCidadeSelecionada] = useState("");
@@ -24,58 +26,42 @@ export default function Notification() {
 
 
   const removerAcentos = (str) => {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + '-parana';
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',AC';
   };
 
   const handleCidadeChange = (event) => {
-    // Atualiza a cidade selecionada quando o usuário escolhe uma opção
     setCidadeSelecionada(event.target.value);
   };
 
-  const handleVerificarClick = () => {
-    const cidadeSemAcento = removerAcentos(cidadeSelecionada.toLowerCase());
-    // Construa a URL da API com a cidade selecionada
-    const apiUrl = `http://api.weatherstack.com/current`;
-
-    const params = {
-      access_key: '29973e7a919cb0510e7768baf62a38c0',
-      query: cidadeSemAcento
-
+  const handleVerificarClick = async () => {
+    try {
+      const cidadeSemAcento = removerAcentos(cidadeSelecionada.toLowerCase());
+      const apiUrl = "http://localhost:3000/weather"; // Altere para a URL do seu servidor intermediário
+      
+      const params = {
+        key: "6aa679a2",
+        city_name: cidadeSemAcento,
+      };
+  
+      const response = await axios.get(apiUrl, { params });
+  
+      if (!response.data.results) {
+        throw new Error("Formato de resposta da API inválido");
+      }
+      const currentData = response.data.results.forecast;
+      console.log(currentData)
+  
+      setHorario(currentData[0].date + " - "+currentData[0].weekday || "");
+      setPrecipitacao(`${currentData[0].rain}mm` || "");
+  
+      const novoAlertaChuva = parseFloat(currentData[0].rain) > 0.2;
+      setAlertaChuva(novoAlertaChuva);
+  
+      setAlertaEnchente(novoAlertaChuva ? "Alerta de Chuva" : "Sem alerta");
+    } catch (error) {
+      console.error("Erro na requisição à API:", error.message);
     }
-    // Construa a URL da API com base nos parâmetros
-    const url = new URL(apiUrl);
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-
-    // Faça a requisição à API usando Fetch
-    fetch(url)
-      .then(response => {
-        // Verifique se a resposta da API foi bem-sucedida (status 200-299)
-        if (!response.ok) {
-          throw new Error(`Erro na requisição à API: ${response.status}`);
-        }
-        // Parse da resposta JSON
-        return response.json();
-      })
-      .then(data => {
-        // Extraia os dados relevantes da resposta da API
-        const currentData = data.current;
-
-        // Atualize os estados com os dados obtidos
-        setHorario(currentData.observation_time || "");
-        setPrecipitacao(`${currentData.precip}mm` || "");
-
-        // Verificação para o alerta de chuva
-        const novoAlertaChuva = parseFloat(currentData.precip) > 55;
-        setAlertaChuva(novoAlertaChuva);
-
-        // Atualização da string do alertaEnchente com base no valor de alertaChuva
-        setAlertaEnchente(novoAlertaChuva ? "Alerta de Chuva" : "Sem alerta");
-      })
-      .catch(error => {
-        // Em caso de erro, manipule conforme necessário
-        console.error("Erro na requisição à API:", error);
-      });
-  }
+  };
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -121,7 +107,7 @@ export default function Notification() {
                       htmlFor="horario"
                     >
                       <i class="far fa-clock mr-2"></i>
-                      Horário de Observação
+                      Dia Previsto
                     </label>
                     <div className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2">
 

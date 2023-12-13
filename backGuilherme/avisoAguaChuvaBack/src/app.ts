@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import axios from 'axios';
 import { criaDoacaoControlador, lerdoacaoControler } from './controlador/doacao.controlador';
 import { criarNecessitadosControlador, lerNecessitadosControler } from './controlador/necessitados.controlador';
 import { criaCadastroControlador, lerdCadastroControler } from './controlador/cadastro.controlador';
@@ -22,4 +23,19 @@ app.get('/cadastro',lerdCadastroControler)
 
 app.post('/necessitados',criarNecessitadosControlador)
 app.get('/necessitados',lerNecessitadosControler)
+
+app.get('/weather', async (req, res) => {
+    try {
+      const response = await axios.get('https://api.hgbrasil.com/weather', {
+        params: req.query,
+      });
+  
+      // Adicione outros cabeçalhos CORS, se necessário
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(response.data);
+    } catch (error) {
+      console.error('Erro na requisição à API externa:', error.message);
+      res.status(500).json({ error: 'Erro na requisição à API externa' });
+    }
+  });
 export {app}
