@@ -182,7 +182,7 @@ export default function CardTableDonation({ color }) {
                     {row.listaDoacao}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      {row.status?<div>Disponivel</div>:<div>Indisponivel</div>}
+                      {row.status?<div>Disponível para doação</div>:<div>Doado</div>}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <button onClick={()=>handleStatusChange(row)} className="bg-lightBlue-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">

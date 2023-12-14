@@ -15,7 +15,6 @@ export default function Notification() {
     "Paranaguá",
     "Campo Grande",
     "Dois Vizinhos",
-    "Rio Branco"
   ];
 
   const [cidadeSelecionada, setCidadeSelecionada] = useState("");
@@ -26,7 +25,7 @@ export default function Notification() {
 
 
   const removerAcentos = (str) => {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',AC';
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',PR';
   };
 
   const handleCidadeChange = (event) => {
@@ -57,7 +56,19 @@ export default function Notification() {
       const novoAlertaChuva = parseFloat(currentData[0].rain) > 0.2;
       setAlertaChuva(novoAlertaChuva);
   
-      setAlertaEnchente(novoAlertaChuva ? "Alerta de Chuva" : "Sem alerta");
+      setAlertaEnchente(novoAlertaChuva ? "Alerta de Enchente" : "Sem alerta");
+      
+      var data = {
+        cidade: cidadeSelecionada,
+        precip: currentData[0].rain,
+        alerta:  novoAlertaChuva,
+      };
+      
+
+        await axios.post("http://localhost:3000/chuva", data, {
+          headers: { "Content-Type": "application/json" },
+        });
+
     } catch (error) {
       console.error("Erro na requisição à API:", error.message);
     }

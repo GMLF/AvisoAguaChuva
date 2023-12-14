@@ -5,6 +5,7 @@ import { criaDoacaoControlador, lerdoacaoControler } from './controlador/doacao.
 import { criarNecessitadosControlador, lerNecessitadosControler } from './controlador/necessitados.controlador';
 import { criaCadastroControlador, lerdCadastroControler } from './controlador/cadastro.controlador';
 import { alteraTabelaControlador, alteraTabelaDoacaoControlador } from './controlador/atualizacao.controlador';
+import { criaChuvaControlador, lerChuvaControler } from './controlador/chuva.controlador';
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.get('/necessitados',lerNecessitadosControler)
 
 app.put('/alteraStatusNecessitados',alteraTabelaControlador)
 app.put('/alteraStatusDoacao',alteraTabelaDoacaoControlador)
+
+app.post('/chuva',criaChuvaControlador)
+app.get('/chua',lerChuvaControler)
 
 app.get('/weather', async (req, res) => {
     try {

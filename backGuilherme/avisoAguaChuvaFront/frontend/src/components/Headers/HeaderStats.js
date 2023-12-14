@@ -73,7 +73,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-4/12 xl:w-4/12 px-4">
                 <CardStats
                   statSubtitle="PORCENTAGEM AJUDAS"
-                  statTitle="0"
+                  statTitle="85"
                   statArrow=""
                   statPercent="100"
                   statPercentColor=""
