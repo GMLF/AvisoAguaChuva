@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/L9di9Sw.jpg" />
+  <img src="https://i.imgur.com/6U5zTLz.png[/img" />
   <h2 align="center">Alerta de Chuva</h2>
 </p>
 
