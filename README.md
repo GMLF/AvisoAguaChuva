@@ -29,13 +29,13 @@ Sua contribuição faz a diferença!
     nvm use 16
     ```
 
-## ✔ Como rodar o back?
-
 3. **Passo:** Baixe o projeto do GitHub - [AvisoAguaChuva](https://github.com/GMLF/AvisoAguaChuva/tree/main).
 
 4. **Passo:** Dentro do cmd, acesse a pasta frontend do projeto clonado.
 
 5. **Passo:** Dentro do caminho frontend, digite `npm install` e depois `npm start`.
+
+## ✔ Como rodar o back?
 
 6. **Passo:** Para rodar o backend (banco de dados), execute os seguintes comandos:
     ```bash
