@@ -19,7 +19,7 @@ Sua contribuição faz a diferença!
 - **Front End:** React e Tailwind.
 - **Back End:** Node.
 
-## ✔ Como rodar o projeto?
+## ✔ Como rodar o front?
 
 1. **Passo:** Baixe o nvm-setup.exe do [link](https://github.com/coreybutler/nvm-windows/releases).
 
@@ -28,6 +28,8 @@ Sua contribuição faz a diferença!
     nvm install 16
     nvm use 16
     ```
+
+## ✔ Como rodar o back?
 
 3. **Passo:** Baixe o projeto do GitHub - [AvisoAguaChuva](https://github.com/GMLF/AvisoAguaChuva/tree/main).
 
